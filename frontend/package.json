@@ -13,6 +13,8 @@
     "@fullcalendar/daygrid": "^6.1.9",
     "@fullcalendar/interaction": "^6.1.9",
     "@fullcalendar/react": "^6.1.9",
+    "@fullcalendar/rrule": "^6.1.9",
+    "@fullcalendar/timegrid": "^6.1.9",
     "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18"

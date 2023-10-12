@@ -2,12 +2,26 @@
 
 import FullCalendar from "@fullcalendar/react"
 import dayGridPlugin from "@fullcalendar/daygrid"
-import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction"
-import { EventContentArg } from "@fullcalendar/core/index.js"
+import interactionPlugin from "@fullcalendar/interaction"
+import { DateSelectArg, EventContentArg } from "@fullcalendar/core/index.js"
+import rrulePlugin from "@fullcalendar/rrule"
+import timeGridPlugin from "@fullcalendar/timegrid"
+import { useEffect, useState } from "react"
 
 const Calendar = () => {
-  const handleDateClick = (arg: DateClickArg) => {
-    alert(arg.dateStr)
+  const [appointments, setAppointments] = useState([])
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/appointments")
+      .then((response) => response.json())
+      .then((data) => setAppointments(data.appointments))
+  }, [])
+
+  const handleSelect = (arg: DateSelectArg) => {
+    if (window.prompt("What is your name?")) {
+      console.log(arg.start)
+    }
+    // arg.view.calendar.unselect()
   }
 
   const renderEventContent = (eventInfo: EventContentArg) => {
@@ -21,15 +35,15 @@ const Calendar = () => {
 
   return (
     <FullCalendar
-      plugins={[dayGridPlugin, interactionPlugin]}
+      plugins={[dayGridPlugin, interactionPlugin, rrulePlugin, timeGridPlugin]}
       initialView="dayGridMonth"
-      events={[
-        { title: "event 1", date: "2023-10-01" },
-        { title: "event 2", date: "2023-10-02" },
-      ]}
-      dateClick={handleDateClick}
+      allDaySlot={false}
+      events={appointments}
+      selectable={true}
+      selectMirror={true}
+      select={handleSelect}
       eventContent={renderEventContent}
-      headerToolbar={{ right: "dayGridMonth,dayGridWeek,dayGridDay", center: "prev,today,next" }}
+      headerToolbar={{ right: "dayGridMonth,timeGridWeek,timeGridDay", left: "prev,today,next", center: "title" }}
     />
   )
 }

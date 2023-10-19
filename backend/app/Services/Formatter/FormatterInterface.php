@@ -2,7 +2,18 @@
 
 namespace App\Services\Formatter;
 
+/**
+ * Interface FormatterInterface
+ *
+ * This interface defines a method for formatting data.
+ */
 interface FormatterInterface
 {
-    public function format($appointments);
+    /**
+     * Format the provided data.
+     *
+     * @param mixed $data
+     * @return mixed
+     */
+    public function format($data);
 }

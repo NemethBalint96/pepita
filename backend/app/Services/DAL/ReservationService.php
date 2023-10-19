@@ -11,13 +11,23 @@ class ReservationService implements ReservationServiceInterface
 
     public function __construct(ReservationFormatterInterface $reservationFormatter)
     {
+        // Constructor to inject the reservation formatter dependency.
         $this->reservationFormatter = $reservationFormatter;
     }
 
-    public function getAll()
+    /**
+     * Get all reservations and format them.
+     *
+     * @return array
+     */
+    public function getAll(): array
     {
+        // Retrieve all reservations from the database.
         $reservations = Reservation::all();
+
+        // Format the reservations using the injected formatter.
         $formattedReservations = $this->reservationFormatter->format($reservations);
+
         return $formattedReservations;
     }
 }

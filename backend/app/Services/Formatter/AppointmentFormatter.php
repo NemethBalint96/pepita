@@ -6,7 +6,13 @@ use App\Enums\Repetition;
 
 class AppointmentFormatter implements AppointmentFormatterInterface
 {
-    public function format($appointments)
+    /**
+     * Format a collection of appointments.
+     *
+     * @param mixed $appointments
+     * @return array
+     */
+    public function format($appointments): array
     {
         $formattedAppointments = [];
 

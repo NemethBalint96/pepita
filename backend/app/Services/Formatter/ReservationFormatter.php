@@ -4,7 +4,13 @@ namespace App\Services\Formatter;
 
 class ReservationFormatter implements ReservationFormatterInterface
 {
-    public function format($reservations)
+    /**
+     * Format a collection of reservations.
+     *
+     * @param mixed $reservations
+     * @return array
+     */
+    public function format($reservations): array
     {
         $formattedReservations = [];
 
@@ -14,7 +20,7 @@ class ReservationFormatter implements ReservationFormatterInterface
             $formattedReservation['title'] = $reservation->title;
             $formattedReservation['start'] = $reservation->start;
             $formattedReservation['end'] = $reservation->end;
-            
+
             $formattedReservations[] = $formattedReservation;
         }
 

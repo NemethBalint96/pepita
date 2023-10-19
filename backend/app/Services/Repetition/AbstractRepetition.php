@@ -11,6 +11,13 @@ use Carbon\CarbonInterval;
 
 abstract class AbstractRepetition
 {
+    /**
+     * Check if a reservation is bookable within an appointment.
+     *
+     * @param Appointment $appointment
+     * @param Reservation $reservation
+     * @return bool
+     */
     public function isBookableTime(Appointment $appointment, Reservation $reservation): bool
     {
         $appointmentStartDate = Carbon::parse($appointment->start_time);
@@ -28,11 +35,19 @@ abstract class AbstractRepetition
         return true;
     }
 
+    /**
+     * Check if there is a free appointment after the original appointment's end time.
+     *
+     * @param Reservation $reservation
+     * @param Carbon $originalAppointmentEnd
+     * @return bool
+     */
     private function isFreeAppointmentAfter(Reservation $reservation, Carbon $originalAppointmentEnd): bool
     {
         $appointments = Appointment::all();
         foreach ($appointments as $appointment) {
             if ($appointment->repetition === Repetition::NoRepetition) {
+                // Check for non-repeating appointments.
                 $secondAppointmentStart = Carbon::parse($appointment->start_time);
                 if ($originalAppointmentEnd->equalTo($secondAppointmentStart)) {
                     if ($appointment->end_time) {
@@ -43,6 +58,7 @@ abstract class AbstractRepetition
                     }
                 }
             } else if ($appointment->repetition === Repetition::Weekly) {
+                // Check for weekly repeating appointments.
                 if ($reservation->start->dayOfWeekIso - 1 === $appointment->day_of_week) {
                     $appointmentStartTime = Carbon::parse($reservation->start);
                     $appointmentStartTime->setTimeFromTimeString(Carbon::parse($appointment->start_time)->toTimeString());
@@ -54,6 +70,7 @@ abstract class AbstractRepetition
                     }
                 }
             } else {
+                // Check for bi-weekly repeating appointments.
                 if ($reservation->start->dayOfWeekIso - 1 === $appointment->day_of_week) {
                     $appointmentStartTime = Carbon::parse($reservation->start);
                     $appointmentStartTime->setTimeFromTimeString(Carbon::parse($appointment->start_time)->toTimeString());

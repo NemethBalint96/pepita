@@ -2,6 +2,9 @@
 
 namespace App\Enums;
 
+/**
+ * Enum for representing days of the week.
+ */
 enum Day: int
 {
     case Monday = 0;

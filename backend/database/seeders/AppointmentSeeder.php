@@ -29,7 +29,7 @@ class AppointmentSeeder extends Seeder
             [
                 'start_time' => '2023-01-01 12:00:00',
                 'repetition' => Repetition::OddWeek,
-                'day_of_week' => Day::Tuesday,
+                'day_of_week' => Day::Wednesday,
                 'time_within_day' => '04:00:00',
             ],
             [

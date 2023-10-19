@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Day;
+use App\Enums\Repetition;
 use Illuminate\Database\Seeder;
 use App\Models\Appointment;
 
@@ -16,31 +18,31 @@ class AppointmentSeeder extends Seeder
             [
                 'start_time' => '2023-09-08 08:00:00',
                 'end_time' => '2023-09-08 10:00:00',
-                'repetition' => 'no repetition',
+                'repetition' => Repetition::NoRepetition,
             ],
             [
                 'start_time' => '2023-01-01 10:00:00',
-                'repetition' => 'even week',
-                'day_of_week' => 0, // Monday
+                'repetition' => Repetition::EvenWeek,
+                'day_of_week' => Day::Monday,
                 'time_within_day' => '02:00:00',
             ],
             [
                 'start_time' => '2023-01-01 12:00:00',
-                'repetition' => 'odd week',
-                'day_of_week' => 2, // Wednesday
+                'repetition' => Repetition::OddWeek,
+                'day_of_week' => Day::Tuesday,
                 'time_within_day' => '04:00:00',
             ],
             [
                 'start_time' => '2023-01-01 10:00:00',
-                'repetition' => 'every week',
-                'day_of_week' => 4, // Friday
+                'repetition' => Repetition::Weekly,
+                'day_of_week' => Day::Friday,
                 'time_within_day' => '06:00:00',
             ],
             [
                 'start_time' => '2023-06-01 16:00:00',
                 'end_time' => '2023-11-30 00:00:00',
-                'repetition' => 'every week',
-                'day_of_week' => 3, // Thursday
+                'repetition' => Repetition::Weekly,
+                'day_of_week' => Day::Thursday,
                 'time_within_day' => '04:00:00',
             ],
         ];

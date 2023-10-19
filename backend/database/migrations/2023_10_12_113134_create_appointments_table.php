@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Repetition;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->dateTime('start_time');
             $table->dateTime('end_time')->nullable();
-            $table->enum('repetition', ["no repetition", "every week", "even week", "odd week"]);
+            $table->enum('repetition', Repetition::getAllValues());
             $table->integer('day_of_week')->unsigned()->nullable();
             $table->time('time_within_day')->nullable();
             $table->timestamps();

@@ -166,8 +166,12 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\FormatterServiceProvider::class,
+        App\Providers\AppointmentServiceProvider::class,
+        App\Providers\ReservationServiceProvider::class,
+        App\Providers\BookingServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
     ])->toArray(),
 
     /*

@@ -8,27 +8,54 @@ import rrulePlugin from "@fullcalendar/rrule"
 import timeGridPlugin from "@fullcalendar/timegrid"
 import { useEffect, useState } from "react"
 
-const Calendar = () => {
+const Calendar = ({apiUrl}: {apiUrl:string}) => {
   const [appointments, setAppointments] = useState([])
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/appointments")
-      .then((response) => response.json())
-      .then((data) => setAppointments(data.appointments))
+    fetchEvents()
   }, [])
 
-  const handleSelect = (arg: DateSelectArg) => {
-    if (window.prompt("What is your name?")) {
-      console.log(arg.start)
+  const fetchEvents = async () => {
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => setAppointments(data))
+  }
+
+  const handleSelect = async (arg: DateSelectArg) => {
+    const name = window.prompt("What is your name?")
+    if (name) {
+      const data = {
+        title: name,
+        start: arg.startStr,
+        end: arg.endStr,
+      }
+      try {
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+        const json = await response.json()
+        if (response.ok) {
+          alert(response.statusText)
+          fetchEvents()
+        } else {
+          alert(json.message)
+        }
+      } catch (error) {
+        console.log(error)
+      }
     }
-    // arg.view.calendar.unselect()
+    arg.view.calendar.unselect()
   }
 
   const renderEventContent = (eventInfo: EventContentArg) => {
     return (
       <>
-        <b>{eventInfo.timeText}</b>
-        <i>{eventInfo.event.title}</i>
+        <i>{eventInfo.timeText}</i>
+        <b className="pl-2">{eventInfo.event.title}</b>
       </>
     )
   }

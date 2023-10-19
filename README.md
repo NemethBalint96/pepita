@@ -1,3 +1,89 @@
+# Requirements
+
+## Backend (Laravel):
+- **PHP**: Laravel is a PHP framework, so you need PHP installed on your system. Make sure you have a version compatible with Laravel.
+
+- **Composer**: Composer is a PHP dependency manager. You will need it to install PHP packages and dependencies for your Laravel project.
+
+- **Database**: You will need a database management system. Laravel supports various databases, but MySQL is commonly used. Make sure you have MySQL or another compatible database system installed and running.
+
+## Frontend (Next.js):
+- **Node.js**: Next.js is a JavaScript framework built on top of Node.js. You need Node.js installed on your system to run and manage JavaScript packages with npm.
+
+- **npm or Yarn**: npm (Node Package Manager) is included with Node.js. Alternatively, you can use Yarn, another package manager. You will use either npm or Yarn to install JavaScript packages and manage dependencies for your Next.js project.
+
+## General:
+- **Git**: You need Git to clone and manage your project's source code from a version control repository
+
+# Setup
+
+## Backend Setup (Laravel)
+
+### 1. Clone the repository and navigate to the backend directory:
+
+```bash
+git clone <repository-url>
+cd pepita/backend
+```
+
+### 2. Install PHP dependencies using Composer:
+```bash
+composer install
+```
+
+### 3. Create a new database for your application.
+
+### 4. Copy the example environment file and configure your database connection by editing the `.env` file:
+
+```bash
+cp .env.example .env
+```
+Update the `.env` file with your database information, like the database name, username, and password.
+
+### 5. Generate an application key:
+```bash
+php artisan key:generate
+```
+
+### 6. Run the database migrations and seed the database with sample data:
+```bash
+php artisan migrate --seed
+```
+
+### 7. Start the Laravel development server:
+```bash
+php artisan serve
+```
+Your Laravel backend should now be running.
+
+## Frontend Setup (Next.js)
+
+### 1. In a new terminal, navigate to the frontend directory:
+```bash
+cd ../frontend
+```
+
+### 2. Install Node.js dependencies using npm:
+```bash
+npm install
+```
+
+### 3. Copy the example local environment file and configure the backend API route by editing the `.env.local` file:
+```bash
+cp .env.local.example .env.local
+```
+Replace http://localhost:8000/api/events with the actual URL of your Laravel backend if it's running on a different address.
+
+### 4. Start the Next.js development server:
+```bash
+npm run dev
+```
+
+Your Next.js frontend should now be running, and it will be able to make API requests to your Laravel backend.
+
+
+# Feladat
+
 Egy megrendelő szeretne egy alkalmazást, amivel nyilvántarthatja a bejelentkezett ügyfeleit. Segítsünk neki.
 
 #### Feladat:
